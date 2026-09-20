@@ -9,46 +9,47 @@ pub use prelude::*;
 #[allow(dead_code)]
 pub mod const_define {
     // Service ERROR start with 00_XXXX
-    pub(crate) const SERVICE_ERROR: &'static str = "00_0000";
+    pub(crate) const SERVICE_ERROR: &str = "00_0000";
 
     // SQLx ERROR start with 01_XXXX
-    pub(crate) const SQLX_ERROR: &'static str = "01_0000";
+    pub(crate) const SQLX_ERROR: &str = "01_0000";
 
     // File ERROR start with 02_XXXX
-    pub const FILE_ERROR: &'static str = "02_0000";
-    pub const FILE_CREATE_FAILED: &'static str = "02_0001";
-    pub const FILE_DELETE_FAILED: &'static str = "02_0002";
-    pub const FILE_NOT_FOUND: &'static str = "02_0003";
-    pub const FILE_ALREADY_EXISTS: &'static str = "02_0004";
-    pub const FILE_FROZEN: &'static str = "02_0005";
-    pub const FILE_WRITE_FAILED: &'static str = "02_0006";
-    pub const FILE_READ_FAILED: &'static str = "02_0007";
+    pub const FILE_ERROR: &str = "02_0000";
+    pub const FILE_CREATE_FAILED: &str = "02_0001";
+    pub const FILE_DELETE_FAILED: &str = "02_0002";
+    pub const FILE_NOT_FOUND: &str = "02_0003";
+    pub const FILE_ALREADY_EXISTS: &str = "02_0004";
+    pub const FILE_FROZEN: &str = "02_0005";
+    pub const FILE_WRITE_FAILED: &str = "02_0006";
+    pub const FILE_READ_FAILED: &str = "02_0007";
 
     // Redis ERROR start with 03_XXXX
-    pub(crate) const REDIS_ERROR: &'static str = "03_0000";
+    pub(crate) const REDIS_ERROR: &str = "03_0000";
 
     // Tokio ERROR start with 04_XXXX
-    pub(crate) const TOKIO_ERROR: &'static str = "04_0000";
-    pub(crate) const TOKIO_TASK_JOIN_ERROR: &'static str = "04_0001";
+    pub(crate) const TOKIO_ERROR: &str = "04_0000";
+    pub(crate) const TOKIO_TASK_JOIN_ERROR: &str = "04_0001";
 
-    pub(crate) const AWC_ERROR: &'static str = "05_0000";
-    pub(crate) const REQWEST_ERROR: &'static str = "06_0000";
+    pub(crate) const AWC_ERROR: &str = "05_0000";
+    pub(crate) const REQWEST_ERROR: &str = "06_0000";
 
-    pub(crate) const CHRONO_PARSE_ERROR: &'static str = "07_0001";
-    pub(crate) const TIME_ZONE_ERROR: &'static str = "07_0002";
-    pub(crate) const WEEK_ERROR: &'static str = "07_0003";
+    pub(crate) const CHRONO_PARSE_ERROR: &str = "07_0001";
+    pub(crate) const TIME_ZONE_ERROR: &str = "07_0002";
+    pub(crate) const WEEK_ERROR: &str = "07_0003";
+    pub(crate) const TIMESTAMP_ERROR: &str = "07_0004";
 
-    pub(crate) const DECIMAL_ERROR: &'static str = "08_0000";
+    pub(crate) const DECIMAL_ERROR: &str = "08_0000";
 
-    pub(crate) const FLATBUFFER_ERROR: &'static str = "09_0000";
+    pub(crate) const FLATBUFFER_ERROR: &str = "09_0000";
 
-    pub(crate) const HTTP_RESPONSE_ERROR: &'static str = "10_0000";
+    pub(crate) const HTTP_RESPONSE_ERROR: &str = "10_0000";
 
-    pub(crate) const STRING_FROM_UTF8_ERROR: &'static str = "10_0001";
+    pub(crate) const STRING_FROM_UTF8_ERROR: &str = "10_0001";
 
-    pub(crate) const SERDE_JSON_ERROR: &'static str = "11_0001";
+    pub(crate) const SERDE_JSON_ERROR: &str = "11_0001";
 
-    pub(crate) const RACTOR_ERROR: &'static str = "12_0000";
+    pub(crate) const RACTOR_ERROR: &str = "12_0000";
 }
 
 #[derive(thiserror::Error, Debug)]
@@ -84,6 +85,10 @@ pub enum AsError {
     #[cfg(feature = "chrono_error")]
     #[error("WeekError")]
     WeekError,
+
+    #[cfg(feature = "chrono_error")]
+    #[error("TimestampError")]
+    TimestampError,
 
     #[cfg(feature = "rust_decimal_error")]
     #[error("DecimalError: {0}")]
