@@ -17,10 +17,10 @@ struct Point {
 fn serde_json_error() -> ResultExt<Point> {
     let point = Point { x: 1, y: 2 };
     let mut serialized =
-        serde_json::to_string(&point).map_err(|e| Into::<ServiceError>::into(e))?;
-    serialized.push_str("}"); // make it invalid JSON
+        serde_json::to_string(&point).map_err(Into::<ServiceError>::into)?;
+    serialized.push('}'); // make it invalid JSON
     let deserialized: Point =
-        serde_json::from_str(&serialized).map_err(|e| Into::<ServiceError>::into(e))?;
+        serde_json::from_str(&serialized).map_err(Into::<ServiceError>::into)?;
     Ok(deserialized)
 }
 
