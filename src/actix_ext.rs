@@ -43,6 +43,9 @@ impl ResponseError for AsError {
             Self::RedisError(_) => StatusCode::INTERNAL_SERVER_ERROR,
 
             #[cfg(feature = "file_error")]
+            Self::IoError(_) => StatusCode::INTERNAL_SERVER_ERROR,
+
+            #[cfg(feature = "file_error")]
             Self::FileError(o) => {
                 use crate::error::file::FileError;
                 match o {
@@ -166,6 +169,10 @@ impl ResponseError for AsError {
             Self::RedisError(_) => {
                 // TODO: write to log
                 HttpResponse::build(StatusCode::INTERNAL_SERVER_ERROR).body(REDIS_ERROR)
+            }
+            #[cfg(feature = "file_error")]
+            Self::IoError(_) => {
+                HttpResponse::build(StatusCode::INTERNAL_SERVER_ERROR).body(FILE_ERROR)
             }
             #[cfg(feature = "file_error")]
             Self::FileError(o) => {

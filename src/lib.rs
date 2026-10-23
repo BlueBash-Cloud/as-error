@@ -66,6 +66,11 @@ pub enum AsError {
     #[error("FileError: {0}")]
     FileError(#[from] FileError),
 
+    /// A standard I/O error, including file and network operations.
+    #[cfg(feature = "file_error")]
+    #[error("IoError: {0}")]
+    IoError(#[from] std::io::Error),
+
     #[cfg(feature = "redis_error")]
     #[error("RedisError: {0}")]
     RedisError(#[from] redis::RedisError),
